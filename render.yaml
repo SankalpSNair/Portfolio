@@ -11,6 +11,4 @@ services:
         generateValue: true
       - key: ALLOWED_HOSTS
         value: ".onrender.com"
-      - key: DATABASE_URL
-        value: sqlite:///db.sqlite3
     autoDeploy: true
