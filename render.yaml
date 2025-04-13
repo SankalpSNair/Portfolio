@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: portfolio
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn portfolio_project.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DATABASE_URL
+        value: sqlite:///db.sqlite3
+    autoDeploy: true
