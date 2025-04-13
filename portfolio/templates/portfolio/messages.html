@@ -1,0 +1,130 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Contact Messages | Sankalp S Nair{% endblock %}
+
+{% block content %}
+<div class="messages-container">
+    <h1 class="messages-heading">Contact Messages</h1>
+    
+    {% if messages %}
+        <div class="messages-list">
+            {% for message in messages %}
+                <div class="message-card">
+                    <div class="message-header">
+                        <h3>{{ message.subject }}</h3>
+                        <span class="message-date">{{ message.created_at|date:"F d, Y" }}</span>
+                    </div>
+                    <div class="message-info">
+                        <p><strong>From:</strong> {{ message.name }} ({{ message.email }})</p>
+                        <p><strong>Time:</strong> {{ message.created_at|time:"H:i" }}</p>
+                    </div>
+                    <div class="message-content">
+                        <p>{{ message.message }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-messages">No messages have been received yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .messages-container {
+        padding: 10rem 9% 2rem;
+        min-height: 100vh;
+    }
+    
+    .messages-heading {
+        font-size: 3.6rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--main-color);
+    }
+    
+    .messages-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .message-card {
+        background: var(--second-bg-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+        border: 0.2rem solid var(--bg-color);
+        transition: 0.3s;
+    }
+    
+    .message-card:hover {
+        border-color: var(--main-color);
+        transform: translateY(-5px);
+    }
+    
+    .message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--main-color);
+        padding-bottom: 1rem;
+    }
+    
+    .message-header h3 {
+        font-size: 2.2rem;
+        color: var(--main-color);
+    }
+    
+    .message-date {
+        font-size: 1.4rem;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
+    
+    .message-info {
+        margin-bottom: 1.5rem;
+    }
+    
+    .message-info p {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .message-content {
+        background: var(--bg-color);
+        padding: 1.5rem;
+        border-radius: 0.8rem;
+    }
+    
+    .message-content p {
+        font-size: 1.6rem;
+        line-height: 1.6;
+    }
+    
+    .no-messages {
+        text-align: center;
+        font-size: 1.8rem;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
+    
+    @media (max-width: 768px) {
+        .messages-container {
+            padding: 8rem 5% 2rem;
+        }
+        
+        .message-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .message-date {
+            margin-top: 0.5rem;
+        }
+    }
+</style>
+{% endblock %}
